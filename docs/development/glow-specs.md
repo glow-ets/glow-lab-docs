@@ -23,7 +23,10 @@ The platform shall be:
             - `glow-ml-webcam.js` (Glow ML Webcam): learns / recognizes webcam images only; turning the video on/off and its transparency are left to Video Sensing
             - `glow-ml-stage.js` (Glow ML Stage): learns / recognizes the stage (including pen drawings) only, never asks for the camera
             - split for privacy: training data is saved inside the project, and features of webcam pictures could be turned back into blurry pictures of the pupils
-            - future ML extensions (i.e. `glow-ml-audio.js`, `glow-ml-text.js`) go next to them in the same folder
+            - Glow ML Stage refuses to learn while the webcam shows on the stage (Video Sensing draws it into the stage canvas), and refuses training data made with Glow ML Webcam
+            - training files: `glow-ml-<webcam|stage>-<project>-<time>.pic.json`, ml5's `dataset`/`tensors` plus a `glowML` entry (`format`, `kind`, `model`, `features`, `source`) that decides what may load where; the name is only a hint, since names get changed
+            - messages start with the extension's short name (`Glow MLW:` / `Glow MLS:`), as stage monitors do
+            - future ML extensions (i.e. `glow-ml-audio.js`, `glow-ml-text.js`) go next to them in the same folder, writing their own `kind` (and file suffix, e.g. `.audio.json`)
     - 2. src/addons:
         - glow-branding: logos, settings
         - glow-disable-webcam: keeps every extension away from the webcam (see _webcam_ under System requirements)
